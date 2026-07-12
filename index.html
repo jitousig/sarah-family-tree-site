@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Vigar Line — Family Tree</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,600;9..144,0,700;9..144,1,400;9..144,1,600&family=Archivo:wght@400;500;600;700&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<!--
+  The Vigar Line — public family-tree page.
+  GENERATED from research-dossier.md in the private sarah-family-tree repo.
+  This published copy embeds no record scans; every claim is graded and cited.
+  Do not edit here — edit the source tree and re-run site-build/build-site.js.
+-->
+<style>
+:root{
+  --paper:#ECEEE2; --paper-deep:#E3E6D5; --paper-line:#C9CEB8;
+  --ink:#22303A; --ink-soft:#51616C; --pencil:#8B9088;
+  --stamp:#A8372A; --record-blue:#2E5372;
+  --vigar:#6b4f3a; --prince:#3E6076; --biddlecombe:#4B6B44; --groves:#8A6D2F; --ashton:#7A4A63;
+  --mcdonald:#B5651D; --woods:#3F6B5E; --vogan:#7C6A9C; --taylor:#9C5A5A;
+  --smith:#41618C; --rafferty:#A9793A; --mcdougall:#5B8A72; --wyburn:#94607F;
+  --node-w:210px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{overflow-x:hidden;}
+@media (prefers-reduced-motion: reduce){ *{animation:none!important;transition:none!important;} }
+body{
+  background:var(--paper);
+  background-image:repeating-linear-gradient(to bottom, transparent 0 34px, rgba(107,120,96,.09) 34px 35px);
+  color:var(--ink); font-family:'Archivo',sans-serif; font-size:16px; line-height:1.55; min-height:100vh;
+}
+header{border:2px solid var(--ink);background:var(--paper-deep);margin:20px auto 8px;max-width:1180px;}
+.form-strip{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--ink);
+  padding:9px 18px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;flex-wrap:wrap;gap:6px;}
+.form-strip .no{font-family:'Courier Prime',monospace;letter-spacing:.05em;color:var(--stamp);}
+.masthead{padding:20px 22px 18px;}
+.masthead h1{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(24px,3.4vw,38px);line-height:1.05;letter-spacing:-.01em;}
+.masthead .lede{font-family:'Fraunces',serif;font-style:italic;color:var(--ink-soft);font-size:15px;margin-top:8px;max-width:74ch;}
+.controls{max-width:1180px;margin:0 auto 6px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:10px 4px;}
+.controls input[type=search]{font-family:'Archivo';font-size:13px;padding:8px 12px;border:1.5px solid var(--pencil);
+  background:var(--paper-deep);color:var(--ink);border-radius:3px;min-width:180px;flex:1 1 180px;max-width:280px;}
+.fchip{font-family:'Archivo';font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  padding:6px 11px;border:1.5px solid var(--pencil);background:transparent;color:var(--ink-soft);border-radius:3px;cursor:pointer;transition:.15s;}
+.fchip[data-on='1']{color:#fff;}
+.fchip.l-vigar[data-on='1']{background:var(--vigar);border-color:var(--vigar);}
+.fchip.l-prince[data-on='1']{background:var(--prince);border-color:var(--prince);}
+.fchip.l-biddlecombe[data-on='1']{background:var(--biddlecombe);border-color:var(--biddlecombe);}
+.fchip.l-groves[data-on='1']{background:var(--groves);border-color:var(--groves);}
+.fchip.l-ashton[data-on='1']{background:var(--ashton);border-color:var(--ashton);}
+.fchip.l-mcdonald[data-on='1']{background:var(--mcdonald);border-color:var(--mcdonald);}
+.fchip.l-woods[data-on='1']{background:var(--woods);border-color:var(--woods);}
+.fchip.l-vogan[data-on='1']{background:var(--vogan);border-color:var(--vogan);}
+.fchip.l-taylor[data-on='1']{background:var(--taylor);border-color:var(--taylor);}
+.fchip.l-smith[data-on='1']{background:var(--smith);border-color:var(--smith);}
+.fchip.l-rafferty[data-on='1']{background:var(--rafferty);border-color:var(--rafferty);}
+.fchip.l-mcdougall[data-on='1']{background:var(--mcdougall);border-color:var(--mcdougall);}
+.fchip.l-wyburn[data-on='1']{background:var(--wyburn);border-color:var(--wyburn);}
+.controls .spacer{flex:1 1 auto;}
+.btn{font-family:'Archivo';font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  padding:8px 14px;border:1.5px solid var(--ink);background:var(--paper-deep);color:var(--ink);border-radius:3px;cursor:pointer;}
+.btn:hover,.btn[data-on='1']{background:var(--ink);color:var(--paper);}
+.scroll{overflow:auto;max-width:100%;border-top:1px solid var(--paper-line);}
+.tree{position:relative;margin:0 auto;padding:34px 40px 60px;width:max-content;min-width:100%;}
+#wires{position:absolute;inset:0;pointer-events:none;z-index:1;}
+#wires path{fill:none;stroke:var(--pencil);stroke-width:1.4;opacity:.5;}
+#wires path.hl{stroke:var(--stamp);opacity:.95;stroke-width:2.2;}
+.band{display:flex;justify-content:center;align-items:stretch;gap:24px;position:relative;z-index:2;margin:0 0 52px;flex-wrap:nowrap;}
+.band-label{position:absolute;left:8px;top:-22px;font-family:'Courier Prime',monospace;font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--pencil);white-space:nowrap;}
+.node.collateral{display:none;}
+body.show-coll .node.collateral{display:block;}
+.node{width:var(--node-w);background:var(--paper-deep);border:1.5px solid var(--ink);border-radius:5px;
+  padding:11px 13px 12px;cursor:pointer;position:relative;transition:transform .12s,box-shadow .12s,opacity .15s;
+  box-shadow:2px 3px 0 rgba(34,48,58,.10);overflow:hidden;}
+.node:hover{transform:translateY(-2px);box-shadow:3px 5px 0 rgba(34,48,58,.16);}
+.node::before{content:'';position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--pencil);}
+.node.subject{border-width:2px;background:var(--ink);color:var(--paper);}
+.node.subject .n-name{color:var(--paper);} .node.subject .n-gen{color:#B9C2B0;} .node.subject .n-sub{color:#C8D0C0;}
+.node.dim{opacity:.14;}
+.n-top{display:flex;justify-content:space-between;align-items:baseline;gap:6px;margin-bottom:5px;}
+.n-gen{font-family:'Courier Prime',monospace;font-size:9px;letter-spacing:.05em;color:var(--pencil);text-transform:uppercase;}
+.n-name{font-family:'Fraunces',serif;font-weight:600;font-size:14.5px;line-height:1.2;color:var(--ink);}
+.n-name em{font-style:italic;font-weight:400;color:var(--ink-soft);}
+.node.subject .n-name em{color:#C8D0C0;}
+.n-sub{font-size:10.5px;color:var(--ink-soft);line-height:1.32;margin-top:3px;}
+.n-chip{margin-top:8px;}
+.chip{font-size:8.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;padding:2px 7px;border-radius:2px;white-space:nowrap;display:inline-block;}
+.chip.sourced{color:var(--stamp);border:1.4px solid var(--stamp);}
+.chip.reported{color:var(--record-blue);border:1.4px dashed var(--record-blue);}
+.chip.gap{color:var(--pencil);border:1.4px dotted var(--pencil);}
+.node.subject .chip{color:#C8D0C0;border-color:#6E7A70;}
+.n-tag{position:absolute;top:-9px;right:8px;background:var(--stamp);color:#fff;font-family:'Courier Prime',monospace;
+  font-size:8px;letter-spacing:.08em;padding:2px 6px;border-radius:2px;text-transform:uppercase;z-index:3;}
+.node.subject .n-tag{background:var(--paper);color:var(--ink);}
+.legend{max-width:1180px;margin:6px auto 0;padding:8px 6px 22px;display:flex;gap:14px;flex-wrap:wrap;font-size:11px;color:var(--ink-soft);}
+.legend span{display:inline-flex;align-items:center;gap:6px;}
+.legend i{width:14px;height:9px;border-radius:2px;display:inline-block;}
+.scrim{position:fixed;inset:0;background:rgba(34,48,58,.45);opacity:0;pointer-events:none;transition:.2s;z-index:40;}
+.scrim.on{opacity:1;pointer-events:auto;}
+.drawer{position:fixed;top:50%;left:50%;width:min(720px,94vw);height:min(88vh,860px);background:var(--paper);
+  border:2px solid var(--ink);border-radius:8px;overflow:hidden;box-shadow:0 24px 64px rgba(34,48,58,.36);
+  transform:translate(-50%,-46%) scale(.98);opacity:0;pointer-events:none;transition:.2s;z-index:50;display:flex;flex-direction:column;}
+.drawer.on{transform:translate(-50%,-50%) scale(1);opacity:1;pointer-events:auto;}
+.d-head{padding:18px 22px 12px;border-bottom:1px solid var(--paper-line);background:var(--paper-deep);position:relative;}
+.d-close{position:absolute;top:12px;right:14px;font-size:22px;line-height:1;background:none;border:none;color:var(--ink-soft);cursor:pointer;}
+.d-gen{font-family:'Courier Prime',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--stamp);margin-bottom:6px;}
+.d-name{font-family:'Fraunces',serif;font-weight:600;font-size:22px;line-height:1.14;}
+.d-name em{font-style:italic;font-weight:400;color:var(--ink-soft);}
+.d-sub{font-size:12.5px;color:var(--ink-soft);margin-top:5px;}
+.d-stamp{margin-top:10px;}
+.d-body{padding:18px 22px 8px;overflow-y:auto;}
+.d-body p{margin-bottom:12px;font-size:14.5px;}
+.d-body h4{font-family:'Courier Prime',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--pencil);margin:18px 0 7px;border-top:1px solid var(--paper-line);padding-top:12px;}
+.d-body .aside{border-left:3px solid var(--groves);background:var(--paper-deep);padding:10px 14px;margin:4px 0 14px;font-size:13px;}
+.d-body .aside .al{font-family:'Fraunces',serif;font-style:italic;font-weight:600;display:block;margin-bottom:3px;color:var(--ink);}
+.d-body ul{margin:0 0 8px 2px;list-style:none;}
+.d-body ul li{font-size:12.5px;color:var(--ink-soft);margin-bottom:6px;padding-left:14px;position:relative;}
+.d-body ul li::before{content:'·';position:absolute;left:2px;color:var(--stamp);font-weight:700;}
+.d-body a{color:var(--record-blue);}
+.d-body .todo{color:var(--stamp);font-style:italic;}
+.d-nav{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--paper-line);
+  padding:10px 18px;background:var(--paper-deep);}
+.d-nav button{font-family:'Archivo';font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  border:1.5px solid var(--ink);background:var(--paper);color:var(--ink);padding:6px 12px;border-radius:3px;cursor:pointer;}
+.d-nav button:hover{background:var(--ink);color:var(--paper);}
+.d-count{font-family:'Courier Prime',monospace;font-size:10px;color:var(--pencil);letter-spacing:.1em;}
+footer{max-width:1180px;margin:0 auto;padding:14px 8px 40px;color:var(--ink-soft);font-size:11.5px;line-height:1.6;}
+@media(max-width:640px){ :root{--node-w:164px;} .band{gap:14px;} .tree{padding:26px 18px 50px;} }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="form-strip">
+    <span>Genealogical Record · Vigar &amp; McDonald Lines</span>
+    <span class="no">Form No. 3 · Rev. 2026-07-09 (Session 9)</span>
+  </div>
+  <div class="masthead">
+    <h1>The Vigar Line</h1>
+    <p class="lede">The ancestry of <strong>Sarah Vigar</strong> up both sides — her father's <strong>Vigar</strong> line from a Somerset Quaker household that married at Bridgwater in 1877, across the Atlantic to the Manitoba prairie and the Saskatchewan dry belt; and her mother's <strong>McDonald</strong> line, an Ontario marriage of 1911 that reached the British Columbia coast and the Patricia Theatre at Powell River. Tap any card for the full record and its sources. Toggle the collateral branches to see the Groves in-laws and the Portreeve kin.</p>
+  </div>
+</header>
+
+<div class="controls">
+  <input type="search" id="search" placeholder="Search a name…" aria-label="Search names">
+  <button class="fchip l-vigar" data-lin="vigar" data-on="1">Vigar</button>
+  <button class="fchip l-prince" data-lin="prince" data-on="1">Prince</button>
+  <button class="fchip l-biddlecombe" data-lin="biddlecombe" data-on="1">Biddlecombe</button>
+  <button class="fchip l-groves" data-lin="groves" data-on="1">Groves</button>
+  <button class="fchip l-ashton" data-lin="ashton" data-on="1">Ashton</button>
+  <button class="fchip l-mcdonald" data-lin="mcdonald" data-on="1">McDonald</button>
+  <button class="fchip l-vogan" data-lin="vogan" data-on="1">Vogan</button>
+  <button class="fchip l-smith" data-lin="smith" data-on="1">Smith</button>
+  <button class="fchip l-woods" data-lin="woods" data-on="1">Woods</button>
+  <button class="fchip l-rafferty" data-lin="rafferty" data-on="1">Rafferty</button>
+  <button class="fchip l-taylor" data-lin="taylor" data-on="1">Taylor</button>
+  <button class="fchip l-mcdougall" data-lin="mcdougall" data-on="1">McDougall</button>
+  <button class="fchip l-wyburn" data-lin="wyburn" data-on="1">Wyburn</button>
+  <span class="spacer"></span>
+  <button class="btn" id="collToggle" data-on="0">Show Groves in-laws &amp; Portreeve kin</button>
+</div>
+
+<div class="scroll">
+  <div class="tree" id="tree">
+    <svg id="wires" xmlns="http://www.w3.org/2000/svg"></svg>
+  </div>
+</div>
+
+<div class="legend">
+  <span><i style="background:var(--vigar)"></i> Vigar line</span>
+  <span><i style="background:var(--prince)"></i> Prince line</span>
+  <span><i style="background:var(--biddlecombe)"></i> Biddlecombe line</span>
+  <span><i style="background:var(--groves)"></i> Groves (in-laws)</span>
+  <span><i style="background:var(--ashton)"></i> Ashton line</span>
+  <span><i style="background:var(--mcdonald)"></i> McDonald line</span>
+  <span><i style="background:var(--vogan)"></i> Vogan line</span>
+  <span><i style="background:var(--smith)"></i> Smith line</span>
+  <span><i style="background:var(--woods)"></i> Woods line</span>
+  <span><i style="background:var(--rafferty)"></i> Rafferty line</span>
+  <span><i style="background:var(--taylor)"></i> Taylor line</span>
+  <span><i style="background:var(--mcdougall)"></i> McDougall line</span>
+  <span><i style="background:var(--wyburn)"></i> Wyburn line</span>
+  <span><span class="chip sourced">Sourced</span></span>
+  <span><span class="chip reported">Reported</span></span>
+  <span><span class="chip gap">To prove</span></span>
+</div>
+
+<footer>
+  A presentation layer over <b>research-dossier.md</b>. Grades: <b>Sourced</b> (primary record / firm correlation), <b>Reported</b> (secondary source / strong candidate), <b>To&nbsp;prove</b> (inference or open gap). Sarah's parents (Kenneth Vigar &amp; Kerri McDonald) are the one living generation shown, at Joel's request; all other living people are omitted. Married pairs share one card; the left stripe shows the family line(s). Built 2026-07-09_0949 (Session 9 — four maternal 3× great-grandparent couples added and sourced from Ontario marriage registers: George Vogan × Sarah Braden (Ulster/Irish) with the Smith line, James Woods × Emily Cassidy with the Rafferty line, and George McDonald × Joanna with the McDougall line; Emma Prince's father named as George Prince, a toll-gate keeper — correcting the earlier "widow" reading of her mother; the Biddlecombe mother identified as Amelia Ann Wyburn and her Wyburn parents of Woolavington added, completing a Vigar/Biddlecombe/Wyburn Polden-Hills cluster. One frontier remains open: the Taylor–Buch household) · self-contained.
+</footer>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true">
+  <div class="d-head">
+    <button class="d-close" id="dClose" aria-label="Close">×</button>
+    <div class="d-gen" id="dGen"></div>
+    <div class="d-name" id="dName"></div>
+    <div class="d-sub" id="dSub"></div>
+    <div class="d-stamp" id="dStamp"></div>
+  </div>
+  <div class="d-body" id="dBody"></div>
+  <div class="d-nav">
+    <button id="dPrev">‹ Prev</button>
+    <span class="d-count" id="dCount"></span>
+    <button id="dNext">Next ›</button>
+  </div>
+</aside>
+
+<script id="tree-data">
+const NODES = [
+
+/* GEN 6 · earliest known Vigars */
+{ id:'william_ann', gen:6, ord:18, lineages:['vigar'], status:'sourced', kind:'couple',
+  tag:'earliest Vigar', name:`William Vigar <em>&amp;</em> Ann`,
+  sub:`Long Sutton, Somerset · late 1700s`, parents:[],
+  facts:`<p>The earliest Vigars yet reached — the parents of Thomas Frederick Vigar, named at his 1824 baptism. A farming family of the <b>Long Sutton / Langport</b> area on the Somerset Levels. Ann's maiden name is not yet known.</p>`,
+  cite:`England, Somerset Church Records (FamilySearch): baptism of Thomas Frederick Vigar, 16 Jun 1824, Long Sutton — parents William Vigar & Ann. SOURCED.` },
+
+/* GEN 5 · 3× great-grandparents — Vigar & Prince */
+{ id:'thomas_emily', gen:5, ord:18, lineages:['vigar'], status:'sourced', kind:'couple',
+  tag:'Henry’s parents', name:`Thomas Frederick Vigar <em>&amp;</em> Emily Ann`,
+  sub:`Long Sutton → Langport · he 1824–1867`, parents:['william_ann'],
+  facts:`<p>Henry Richard Vigar's parents. <b>Thomas Frederick Vigar</b> was baptised at Long Sutton on 16 June 1824 and died in the Langport district in 1867 (buried at Pitney, 1 May 1867), when Henry Richard was about thirteen. With his wife <b>Emily Ann</b> he had children including <b>Henry Richard</b>, <b>Albert Percival</b>, Frederick William, Frances Bessie, and Emily Ann Vigar.</p>`,
+  aside:{al:'Where "Percival" begins',html:`Henry Richard's brother was <b>Albert Percival</b> Vigar. The name threads all the way down the line — to Henry Richard's son <b>Frederick Percival</b> ("Percy") and his grandson <b>Dudley Percival</b>.`},
+  offspring:['Henry Richard Vigar (1854) — the direct line','Albert Percival Vigar','Frederick William Vigar','Frances Bessie Vigar','Emily Ann Vigar'],
+  cite:`England, Somerset Church Records (FamilySearch): Thomas Frederick Vigar & Emily Ann, child Henry Richard Vigar; Thomas Frederick bp. Long Sutton 1824, d./bur. Pitney 1867. SOURCED.` },
+
+/* GEN 5 · Prince line */
+{ id:'mary_ann_prince', gen:5, ord:22, lineages:['prince'], status:'sourced', kind:'couple',
+  tag:'Emma’s parents', name:`George Prince <em>&amp;</em> Mary Anne Prince`, sub:`Somerset toll-gates · she b. ~1816 Chelsea, London – d. 1907 Street`, parents:[],
+  facts:`<p>Emma Charlotte Prince's parents. Her father — long unknown — is now named: <b>George Prince</b>, an itinerant <b>toll-gate keeper</b>. At Emma's baptism on 17 November 1861 at <b>North Cadbury, Somerset</b>, the register gives the family's abode as "<b>Turnpike Gate</b>" and George's trade as "<b>toll gate keeper</b>," with the mother recorded as <b>Mary Anne Prince</b>. His work on the turnpikes explains the family's moves — Emma was born at Tatworth (near Chard) about 1856, then baptised at North Cadbury five years later.</p>
+  <p><b>Mary Anne (b. ~1816, Chelsea, London)</b> is documented across two censuses. In 1861 she heads a two-person household at <b>Catherston Leweston, Dorset</b> with young <b>Emma C, 5</b> and no husband present — but this most likely means George was simply enumerated <b>at his turnpike gate</b> on census night, apart from his family, <b>not</b> that Mary Anne was already widowed. By 1881 she is a widow in Henry &amp; Emma Vigar's household at Greinton (with grandsons Percy, 2, and Victor). She ended her days among the Street Quakers, where she is buried.</p>`,
+  aside:{al:'A toll-gate keeper, and a correction',html:`George's living presence in November 1861 <b>overturns the earlier reading</b> that Mary Anne was a widow by the April-1861 census — he was almost certainly at his North Cadbury turnpike gate that night. The Prince origin still points to <b>Chelsea, London</b> (Mary Anne's birthplace, twice confirmed); a Prince cluster at <b>Crewkerne</b>, near Tatworth, is a candidate origin for George. Mary Anne's own maiden name is still unknown.`},
+  offspring:['Emma Charlotte Prince (b. ~1856 Tatworth, m. Henry Richard Vigar) — the direct line'],
+  cite:`Emma's baptism: Somerset C of E Baptisms 1813-1924 (South West Heritage Trust D\\P\\Cad.N\\2\\1\\3): 17 Nov 1861, North Cadbury — father George Prince, "toll gate keeper," abode "Turnpike Gate," mother Mary Anne. Mary Anne: 1861 Census, Catherston Leweston (RG9/1369 f.114 — b. Chelsea London) & 1881 Census, Greinton; Find A Grave #199807089 (Street Friends). SOURCED. <span class='todo'>Next: confirm George in the 1861 census at the North Cadbury gate; the George × Mary Anne marriage (~1850–56) would give her maiden name.</span>` },
+
+/* GEN 5 · 3× great-grandparents — maternal maiden lines & Wyburn (added Session 9) */
+{ id:'george_mcdonald_joanna', gen:5, ord:24, lineages:['mcdonald'], status:'sourced', kind:'couple',
+  tag:'John’s parents', name:`George McDonald <em>&amp;</em> Joanna`,
+  sub:`Caledon / Dufferin, Ontario · Scottish-descent`, parents:[],
+  facts:`<p>John McDonald's parents, on the McDonald side — named at John's <b>1879 Caledon marriage register</b>. A Scottish-descent Ontario family; John was <b>Canada-born (~1853)</b>, so the McDonald crossing from Scotland was <b>this generation or earlier</b>. Their grandson John Edgar McDonald's own eldest son was named <b>George</b> for this great-grandfather — the naming pattern that helped lock the line. Joanna's maiden name is not yet recorded.</p>`,
+  offspring:['John McDonald (b. ~1853, m. Flora McDougall) — the direct line'],
+  cite:`Ontario Marriages 1826-1943: John McDonald × Flora McDougall, 20 Feb 1879, Caledon Twp, Peel Co. — groom's parents <b>George McDonald & Joanna</b>. Confirmed by the 1891 Mono/Cardwell census (eldest son "George," Presbyterian, Scottish parentage). SOURCED (register).` },
+
+{ id:'donald_mcdougall_margaret', gen:5, ord:26, lineages:['mcdougall'], status:'sourced', kind:'couple',
+  tag:'Flora’s parents', name:`Donald McDougall <em>&amp;</em> Margaret`,
+  sub:`Peel / Dufferin, Ontario · Scottish-descent`, parents:[],
+  facts:`<p>Flora McDougall's parents, on the McDougall side — named at Flora's <b>1879 Caledon marriage register</b>. A Scottish-descent Ontario family of the Peel/Dufferin country, the same Presbyterian world as the McDonalds they married into. Margaret's maiden name is not yet recorded.</p>`,
+  offspring:['Flora McDougall (m. John McDonald) — the direct line'],
+  cite:`Ontario Marriages 1826-1943: John McDonald × Flora McDougall, 20 Feb 1879, Caledon Twp, Peel Co. — bride's parents <b>Donald McDougall & Margaret</b>. SOURCED (register).` },
+
+{ id:'george_vogan_sarah', gen:5, ord:28, lineages:['vogan'], status:'sourced', kind:'couple',
+  tag:'Thomas’s parents', name:`George Vogan <em>&amp;</em> Sarah <em>[Braden]</em>`,
+  sub:`b. ~1811 Ireland → Mornington, Perth, Ontario · Ulster/Scots-Irish`, parents:[],
+  facts:`<p>Thomas Vogan's parents, on the Vogan side — named at Thomas's <b>1867 Huron marriage</b> as <b>George Vogan</b> and <b>Sarah</b>. <b>George (b. ~1811, Ireland)</b> heads a <b>"Free Church" (Presbyterian)</b> Vogan household in the <b>1861 census at Mornington, Perth</b>, right beside the Howick country where his son Thomas married and lived — anchoring the Irish Vogan immigration to a real Ontario household. The family appears earlier still at Durham, Canada West (1851).</p>`,
+  aside:{al:'An Ulster origin',html:`A member tree gives George's fuller name as <b>George Harshaw Vogan</b> and his wife as <b>Sarah Braden</b> (reported). "Harshaw" and "Braden" are distinctive <b>Ulster / Scots-Irish Presbyterian</b> names — which, with the household's "Free Church" religion, points the Vogan origin to <b>Ulster, Northern Ireland</b>. The exact county/townland is still to be found.`},
+  offspring:['Thomas Vogan (b. ~1844 Ireland, m. Eliza Jane Smith) — the direct line'],
+  cite:`Marriage: Ontario County/Provincial Marriage Registers — Thomas Vogan (of Howick), 1 Nov 1867, Huron Co. — parents <b>George Vogan & Sarah</b>. Household: 1861 Census of Canada, Mornington, Perth (George Vogan, Head, ~50, b. Ireland, "Free Church"); 1851 Census, Durham. Sarah = "Braden" and George's middle name "Harshaw" are REPORTED (member tree). SOURCED (parents named on the marriage register).` },
+
+{ id:'john_smith_martha', gen:5, ord:30, lineages:['smith'], status:'sourced', kind:'couple',
+  tag:'Eliza Jane’s parents', name:`John Smith <em>&amp;</em> Martha Austin`,
+  sub:`Howick Twp, Huron County, Ontario`, parents:[],
+  facts:`<p>Eliza Jane Smith's parents, on the Smith side — named at her <b>1867 Huron marriage</b>. An Ontario-established family of <b>Howick Township, Huron County</b>: their daughter Eliza Jane was Howick-born (~1844/1851) and married the Irish immigrant Thomas Vogan there in 1867.</p>`,
+  offspring:['Eliza Jane Smith (m. Thomas Vogan) — the direct line'],
+  cite:`Ontario County Marriage Registers 1858-1869 / Ontario Marriages 1826-1943: Thomas Vogan × Elizabeth Jane Smith, 1 Nov 1867, Huron Co. — bride's parents <b>John Smith & Martha Austin</b>. SOURCED (register).` },
+
+{ id:'james_woods_emily', gen:5, ord:32, lineages:['woods'], status:'sourced', kind:'couple',
+  tag:'Michael’s parents', name:`James Woods <em>&amp;</em> Emily Cassidy`,
+  sub:`Toronto, Ontario · Toronto-Irish`, parents:[],
+  facts:`<p>Michael Woods's parents, on the Woods side — named at Michael's <b>1898 Toronto marriage</b>. A <b>Toronto-Irish</b> family: the mother's maiden name <b>Cassidy</b> marks the Irish strand that runs through the whole Woods–Rafferty world of Toronto.</p>`,
+  offspring:['Michael Debaney Woods (b. ~1873, m. Helen Rafferty) — the direct line'],
+  cite:`Ontario Marriages 1826-1943: Michael Woods × Ellen Rafferty, 5 Aug 1898, York (Toronto) — groom's parents <b>James Woods & Emily Cassidy</b>. SOURCED (register).` },
+
+{ id:'james_rafferty_mary', gen:5, ord:34, lineages:['rafferty'], status:'sourced', kind:'couple',
+  tag:'Helen’s parents', name:`James Rafferty <em>&amp;</em> Mary Bonestill`,
+  sub:`Toronto, Ontario · Toronto-Irish`, parents:[],
+  facts:`<p>Helen ("Ellen") Rafferty's parents, on the Rafferty side — named at Helen's <b>1898 Toronto marriage</b>. Another Toronto-Irish household of the same community as the Woods family into which their daughter married.</p>`,
+  offspring:['Helen Rafferty (m. Michael Woods) — the direct line'],
+  cite:`Ontario Marriages 1826-1943: Michael Woods × Ellen Rafferty, 5 Aug 1898, York (Toronto) — bride's parents <b>James Rafferty & Mary Bonestill</b>. SOURCED (register).` },
+
+{ id:'robert_susanna_wyburn', gen:5, ord:11, lineages:['wyburn'], status:'sourced', kind:'couple',
+  tag:'Amelia Ann’s parents', name:`Robert Wyburn <em>&amp;</em> Susanna Wyburn`,
+  sub:`Woolavington, Somerset · Polden Hills`, parents:[],
+  facts:`<p>Amelia Ann Wyburn's parents — a Somerset-Levels family of <b>Woolavington</b>, named in the <b>1851 census</b> where their daughter "Emilia" (Amelia Ann) is twelve. Woolavington is a Bridgwater-union parish beside Shapwick and Cossington, so this line sits in the very same <b>Polden Hills</b> cluster as the Vigars (Ashcott/Greinton) and the Biddlecombes (Shapwick).</p>`,
+  aside:{al:'The third Polden-Hills family',html:`Their daughter Amelia Ann married William Josiah Biddlecombe (in Chelsea, while in London service), but she was <b>Somerset-born</b> — so Vigar, Biddlecombe and Wyburn were three neighbouring Levels families whose paths kept crossing before the line reached Percy &amp; Amelia in Canada.`},
+  offspring:['Amelia Ann Wyburn (b. ~1839 Woolavington, m. William Josiah Biddlecombe) — the direct line'],
+  cite:`1851 Census, Woolavington, Bridgwater RD (TNA HO107/1925 — Robert & Susanna Wyburn, dau. "Emilia" 12); 1861 Census (Emilia Wyburn, 22, b. Bridgwater, Somerset); Ancestry record-links Amelia Ann Wyburn → Amelia Biddlecombe. SOURCED.` },
+
+/* GEN 4 · Somerset origin + Groves founders */
+{ id:'henry_emma', gen:4, ord:22, lineages:['vigar','prince'], status:'sourced', kind:'couple',
+  tag:'m. 1877', name:`Henry Richard Vigar <em>&amp;</em> Emma Charlotte Prince`,
+  sub:`m. Sep 1877, Bridgwater · he b. Long Sutton 1854 – 1937 · she 1855–1932`, parents:['thomas_emily','mary_ann_prince'],
+  facts:`<p>The origin couple, and the first generation tied together by a <b>documentary</b> record rather than inference. <b>Henry Richard Vigar</b> (1 Jun 1854 – 6 Dec 1937) and <b>Emma Charlotte Prince</b> (1855–1932) were a Quaker family of Street, Somerset — the shoemaking company village built around <b>Clarks</b>, where the Friends' Meeting dates to 1656 and members "insisted on marriage within the Society."</p>
+  <p>Their marriage was found in the GRO civil index: both partners on the identical district, volume and page — <b>Bridgwater, vol 5c, page 582, Sep quarter 1877</b> — which in the index means they married each other. Both are buried at the Street Friends Burial Ground.</p>`,
+  aside:{al:'Bridgwater, not Street',html:`The family registered in the <b>Bridgwater</b> district, not Wells (which covers Street itself) — so in 1877–78 they lived in the Bridgwater union, among the Levels parishes just west of Street.`},
+  offspring:['Percy / "Frederick Percival" (b. ~1878) — the direct line','Cyril "Claude" (1888) → Portreeve SK','Gerald Vaughan (1891) → Portreeve SK'],
+  cite:`GRO marriage index (FreeBMD): <i>Vigar Henry Richard</i> &amp; <i>Prince Emma Charlotte</i>, both Bridgwater 5c/582, Sep 1877. <a href='https://www.findagrave.com/memorial/199807163' target='_blank' rel='noopener'>Find A Grave 199807163</a> / <a href='https://www.findagrave.com/memorial/199807150' target='_blank' rel='noopener'>199807150</a>. Henry Richard's birth: <i>Vigar Henry Richard</i>, Langport 5c/511, Jun 1854 (FreeBMD) — a Langport/Somerton family that moved to Quaker Street. <span class='todo'>Next: order GRO marriage cert 5c/582 & birth cert 5c/511 (both name fathers); 1861 census, Langport.</span>` },
+
+{ id:'edwin_catherine', gen:4, ord:48, lineages:['groves'], status:'sourced', kind:'couple', collateral:true,
+  tag:'Groves', name:`Edwin Groves <em>&amp;</em> Catherine Groves`,
+  sub:`Portreeve, Saskatchewan · he 1845–1928 · she 1864–1937`, parents:[],
+  facts:`<p>The Groves parents of Portreeve, Saskatchewan. At least five of their children settled in the district: sons <b>William E.</b> (1889–1924), <b>Richard H.</b> (1891–1934) and <b>Robert J.</b> (1899–1937), and daughters <b>Annie Nancy</b> and <b>Mary Ellen</b>, who married the two Vigar brothers.</p>`,
+  aside:{al:'Two sibling-pair marriages',html:`Not one but two: two Groves <i>sisters</i> married two Vigar <i>brothers</i>; and two Groves <i>brothers</i> (Richard &amp; Robert) married two <b>Patrick</b> <i>sisters</i> (Jean &amp; Margaret). A tight endogamous knot typical of a small settler colony.`},
+  offspring:['William E. Groves (1889–1924)','Richard H. Groves (1891–1934) m. Jean Patrick','Robert J. Groves (1899–1937) m. Margaret Patrick','Mary Ellen → Gerald Vigar','Annie Nancy → Claude Vigar'],
+  cite:`Portreeve Memorial Cemetery transcription (Saskatchewan Cemeteries Project) + Find A Grave. <span class='todo'>English origins still unconfirmed — a member-tree candidate (b. 1845 Norbury, Shropshire; parents Richard Groves × Mary Ridge; wife Catherine "Beedles") matches the 1928 Portreeve death but shows him in Shropshire in 1891, conflicting with our sourced Woodstock, Ontario 1880s timeline → likely two different Edwin Groves; needs the Woodstock census to resolve.</span>` },
+
+/* GEN 4 · maternal 2× great-grandparents — added Session 7, all SOURCED */
+{ id:'thomas_biddlecombe_prudence', gen:5, ord:8, lineages:['biddlecombe'], status:'sourced', kind:'couple',
+  tag:'a Quaker family', name:`Thomas Biddlecombe <em>&amp;</em> Prudence`,
+  sub:`Shapwick, Somerset · early 1800s`, parents:[],
+  facts:`<p>The parents of William Josiah Biddlecombe, named at his 1825 Shapwick christening. A <b>Somerset Quaker</b> family of the Polden-Hills Levels — William Josiah appears in the Society of Friends (RG6) registers and the Quaker Published Memorials. Prudence's maiden name is not yet known.</p>`,
+  aside:{al:'Two Quaker families, one small world',html:`The Biddlecombes were <b>Friends</b>, just like the Vigars (buried at the Street Friends ground). Both were Polden-Hills Quaker families of adjoining Levels parishes — the very network that would one day put Percy Vigar and Amelia Biddlecombe together.`},
+  offspring:['William Josiah Biddlecombe (b. 1825, Shapwick) — the direct line'],
+  cite:`England Births & Christenings (FHL 813698, v107 p139): William Josiah Biddlecombe, b. 23 May 1825 Shapwick — father Thomas Biddlecombe, mother Prudence. Quaker RG6 registers + Quaker Published Memorials 1818-1919. SOURCED (index).` },
+
+{ id:'william_biddlecombe', gen:4, ord:8, lineages:['biddlecombe'], status:'sourced', kind:'couple',
+  tag:'Amelia’s parents', name:`William Josiah Biddlecombe <em>&amp;</em> Amelia Ann Wyburn`,
+  sub:`Shapwick & Woolavington, Somerset → Eye and Dunsden, Oxon · he b. 1825 · she b. ~1839`, parents:['thomas_biddlecombe_prudence','robert_susanna_wyburn'],
+  facts:`<p>Amelia Rhoda Biddlecombe's parents — a <b>Shapwick, Somerset</b> Quaker farming family. <b>William Josiah Biddlecombe</b> was born at Shapwick on <b>23 May 1825</b> (son of Thomas Biddlecombe &amp; Prudence). Shapwick is a Polden-Hills / Bridgwater-Levels parish <b>right next to Ashcott and Greinton</b>, where the Vigars farmed — so Percy Vigar and Amelia grew up as near-neighbours in the same small Friends community. The 1881 &amp; 1891 censuses place the family at Shapwick and Bridgwater; by <b>1901</b> William (a "retired farmer," 75) and Amelia (62) had moved to <b>Eye and Dunsden, Oxfordshire</b>, near Reading.</p>
+  <p><b>The mother is now named: Amelia Ann Wyburn.</b> William Josiah — already a widower — married her in the <b>Oct–Dec quarter of 1872 at Chelsea, London</b> (GRO 1a/496), which confirms the long-standing hunch that his younger second wife (b. ~1839) was the mother of his late child Amelia Rhoda (b. 1878). Despite the London wedding, Amelia Ann was herself a <b>Somerset-Levels woman</b> — the 1861 census records her as "Emilia Wyburn, 22, born Bridgwater, Somerset."</p>`,
+  aside:{al:'A Polden-Hills cluster: Vigar, Biddlecombe & Wyburn',html:`Amelia Ann Wyburn grew up at <b>Woolavington</b>, a Levels parish beside Shapwick and Cossington. So all three of these families — <b>Vigar</b> (Ashcott/Greinton), <b>Biddlecombe</b> (Shapwick) and <b>Wyburn</b> (Woolavington) — were Polden-Hills Bridgwater-Levels neighbours; William and Amelia simply happened to marry in Chelsea while in London service. It also explains Percy's sister <b>Lottie Vigar</b> turning up as the Biddlecombes' live-in "mother's help" in the 1901 census — the families already knew each other. The couple married nearby at <b>Wokingham</b> in 1903.`},
+  offspring:['Amelia Rhoda "Minnie" Biddlecombe (b. 1878, m. Percy Vigar) — the direct line'],
+  cite:`Marriage: England & Wales Civil Reg Marriage Index — William Josiah Biddlecombe × <b>Amelia Ann Wyburn</b>, Q4 1872, Chelsea RD (GRO 1a/496); Ancestry record-links Amelia Ann Wyburn → Amelia Biddlecombe across the 1881/1891/1901/1911 censuses. Also: 1851/1881/1891 censuses (Shapwick, Bridgwater) & 1901 (Eye and Dunsden, Oxon); William Josiah's christening 23 May 1825 Shapwick; GRO birth index, Amelia Rhoda Biddlecombe, Bridgwater, Oct 1878; SOURCED. <span class='todo'>William Josiah's first wife/marriage (~1850) still open.</span>` },
+
+{ id:'john_mcdonald_flora', gen:4, ord:26, lineages:['mcdonald'], status:'sourced', kind:'couple',
+  tag:'John Edgar’s parents', name:`John McDonald <em>&amp;</em> Flora McDougall`,
+  sub:`Caledon → Mono, Dufferin County, Ontario · m. 1879 · both b. Ontario`, parents:['george_mcdonald_joanna','donald_mcdougall_margaret'],
+  facts:`<p>John Edgar McDonald's parents — Sarah's maternal 2× great-grandparents on the McDonald side. A Scottish-descent, <b>Presbyterian ("Free Church")</b> farming family of <b>Mono Township, Dufferin County, Ontario</b>. They married on <b>20 February 1879 in Caledon Township, Peel County</b>; both were themselves <b>Ontario-born</b>, so the McDonald/McDougall arrival from Scotland was an earlier generation. In the 1891 census their son <b>John Edgar</b> (age 9) is at home among seven in the household — with an <b>eldest son named George</b>, for his grandfather.</p>`,
+  offspring:['George McDonald (b. ~1880) — eldest son, named for his grandfather','John Edgar McDonald (b. ~1882, m. Ethel Vogan) — the direct line'],
+  cite:`Marriage: Ontario Marriages 1826-1943 — John McDonald × Flora McDougall, 20 Feb 1879, Caledon Twp, Peel Co. (his parents George McDonald & Joanna; hers Donald McDougall & Margaret). Also: John Edgar's 1911 marriage index; 1891 Census of Canada, Mono, Cardwell (John E McDonald, son, age 9; eldest son George 11). SOURCED.` },
+
+{ id:'thomas_vogan_eliza', gen:4, ord:29, lineages:['vogan'], status:'sourced', kind:'couple',
+  tag:'Ethel’s parents', name:`Thomas Vogan <em>&amp;</em> Eliza Jane Smith`,
+  sub:`Howick → Wiarton, Bruce County, Ontario · m. 1867 · he b. 1844 Ireland · she b. ~1844 Ontario`, parents:['george_vogan_sarah','john_smith_martha'],
+  facts:`<p>Ethel Jemima Vogan's parents — Sarah's maternal 2× great-grandparents on the Vogan side. <b>Thomas Vogan was born in Ireland (~1844)</b> and immigrated; his wife <b>Eliza Jane Smith</b> was Ontario-born (~1844). They married on <b>1 November 1867 in Huron County</b>, Thomas then "of Howick Township," before moving north to farm at <b>Wiarton / Albemarle, Bruce North</b> on the Bruce Peninsula (a Presbyterian "Free Church" household). The <b>1891 census</b> shows the couple at Wiarton with eight children, among them <b>"Jemima," age 4</b> — Sarah's great-grandmother <b>Ethel Jemima Vogan</b> (b. 3 Jan 1887), listed by her middle name. She married John Edgar McDonald at Hamilton in 1911.</p>`,
+  aside:{al:'An Irish origin for the Vogan line',html:`Thomas's Irish birth means the Vogan immigration was <b>his own</b> generation. His father <b>George Vogan</b> (b. ~1811 Ireland) headed a "Free Church" household at <b>Mornington, Perth</b>, next to the Howick country where Thomas married — so the family is now anchored to a real Ontario household, and the distinctive Ulster/Scots-Irish names in it (Harshaw, Braden) point the origin to <b>Ulster, Northern Ireland</b>. His wife's Smith family (John Smith × Martha Austin) was already Ontario-established.`},
+  offspring:['Ethel Jemima Vogan (b. 3 Jan 1887, m. John Edgar McDonald) — the direct line','John, Margaret A, Ellen, Sarah, Thomas E, Wm Arthur, Samuel (siblings)'],
+  cite:`Marriage: Ontario County Marriage Registers 1858-1869 / Ontario Marriages 1826-1943 — Thomas Vogan × Elizabeth Jane Smith, 1 Nov 1867, Huron Co. (his parents George Vogan & Sarah; hers John Smith & Martha Austin). 1891 Census of Canada, Wiarton, Bruce North (LAC T-6328, fam. 25 — Thomas 47 b. Ireland, Eliza 47 b. Ontario, dau. "Jemima" 4) 1881 Census, Albemarle; Ontario Births (RG 80-2, Reel 80): Ethel Jemima Vogan b. 3 Jan 1887, parents Thos Vogan & Eliza Jane Smith. SOURCED.` },
+
+{ id:'michael_woods_helen', gen:4, ord:31, lineages:['woods'], status:'sourced', kind:'couple',
+  tag:'James Edwin’s parents', name:`Michael Debaney Woods <em>&amp;</em> Helen Rafferty`,
+  sub:`Toronto / York, Ontario · m. 1898 · he ~1873 – 1926`, parents:['james_woods_emily','james_rafferty_mary'],
+  facts:`<p>James Edwin Woods's parents — Sarah's maternal 2× great-grandparents on the Woods side, a <b>Toronto-Irish</b> family. <b>Michael Woods</b> was born at <b>Toronto about 1873</b> and died <b>9 August 1926 at York (Toronto)</b>, aged 53. He married <b>Helen ("Ellen") Rafferty</b> on <b>5 August 1898 at York (Toronto)</b>. Their son <b>James Edwin Woods</b> was born at Toronto about 1899 and married Jean Kezia Taylor at York in 1928.</p>`,
+  aside:{al:'A Toronto-Irish world',html:`Both parent lines named on the 1898 marriage register carry Irish surnames — Michael's mother was an <b>Emily Cassidy</b>, and Helen's a <b>Mary Bonestill</b>, with Rafferty on the other side — placing the Woods household squarely in Toronto's Irish community.`},
+  offspring:['James Edwin Woods (b. ~1899, m. Jean Kezia Taylor) — the direct line'],
+  cite:`Marriage: Ontario Marriages 1826-1943 — Michael Woods × Ellen ("Helen") Rafferty, 5 Aug 1898, York (Toronto): his parents James Woods & Emily Cassidy; hers James Rafferty & Mary Bonestill. Also: Ontario Marriages 1826-1943 (Reel 854), 1928 York groom-side index; Ontario Deaths index (Michael d. 9 Aug 1926 York, age 53). SOURCED.` },
+
+{ id:'joseph_taylor_mary', gen:4, ord:34, lineages:['taylor'], status:'sourced', kind:'couple',
+  tag:'Jean’s parents', name:`Joseph Taylor <em>&amp;</em> Mary Buch`,
+  sub:`England → Ontario`, parents:[],
+  facts:`<p>Jean Kezia Taylor's parents — Sarah's maternal 2× great-grandparents on the Taylor side, an <b>English</b> family. Their daughter <b>Jean Kezia Taylor</b> was born in <b>England about 1902</b> and emigrated to Canada; she married James Edwin Woods at York, Ontario in 1928.</p>`,
+  aside:{al:'⚑ The one open frontier',html:`This is now the <b>only</b> ancestral line still walled. With all three other maternal families pushed back a further generation, the <b>Taylor–Buch household in England remains unlocked</b>: Jean cannot be found in the 1911 England census, and "Mary Buch" is not uniquely identifiable without the family's location. The decisive next step is <b>Jean's 1902 GRO birth certificate</b> (its mother's-maiden-name field would confirm "Buch" and pin the birth district) <b>or family testimony</b> on where the Taylors lived.`},
+  offspring:['Jean Kezia Taylor (b. ~1902 England, m. James Edwin Woods) — the direct line'],
+  cite:`Ontario, Canada, Marriages, 1826-1943 (Reel 854), bride-side index for the 1928 York marriage: Jean Kaziah Taylor, b. ~1902 England — father Joseph Taylor, mother Mary Buch ("Buch" spelling verified). SOURCED. <span class='todo'>Taylor–Buch gen-5 OPEN — needs Jean's 1902 GRO birth cert or family testimony.</span>` },
+
+/* GEN 3 · great-grandparents & in-law lines */
+{ id:'percy_amelia', gen:3, ord:12, lineages:['vigar','biddlecombe'], status:'sourced', kind:'couple',
+  tag:'direct line', name:`Percy Vigar <em>&amp;</em> Amelia Rhoda Biddlecombe`,
+  sub:`both b. 1878 Somerset · emig. 1904 (SS Tunisian) · both bur. Beaconsfield, Somerset MB · he 1878–1965 · she 1878–1970`, parents:['henry_emma','william_biddlecombe'],
+  facts:`<p>Sarah's great-grandparents and the immigrants who carried the line to Canada. Both were born in 1878 in the <b>Somerset Levels</b> — Percy at the Vigar home around Ashcott, Amelia at nearby <b>Shapwick</b> — adjoining Quaker villages. They married at <b>Wokingham, Berkshire</b> in December 1903 and <b>emigrated in 1904</b>.</p>
+  <p><b>The crossing — now documented.</b> Percy sailed on the Allan Line <b>SS <i>Tunisian</i></b>, arriving at Halifax / Saint John on <b>23 April 1904</b> bound for <b>Winnipeg</b> — travelling as a "labourer" <b>alongside his brother Victor</b> (24), who was on the very same manifest, same ship, same destination. By 1907 the couple were farming the Swan Lake / South Norfolk / Lorne country of Manitoba, where their six children were born 1907–1919.</p>
+  <p><b>Percy = Frederick Percival Vigar — proven.</b> The <b>1891 census (Ashcott)</b> lists "Frederick P Vigar," 12, as a son of Henry Richard &amp; Emma Charlotte; the <b>1881 census (Greinton)</b> lists him as "Percy." <b>Amelia = Amelia Rhoda "Minnie" Biddlecombe</b>, daughter of William Josiah &amp; Amelia Biddlecombe of Shapwick (the "Gate" on Dudley's death record was an error).</p>
+  <p><b>From a prosperous farm to Depression "odd jobs."</b> The <b>1916 prairie census</b> shows a working farm with a live-in <b>servant</b> and a <b>hired man</b>; by the <b>1931 census</b> the whole family — Percy, Amelia and all six children — were at <b>Treherne, Manitoba</b>, but Percy was reduced to a "Laborer" at "odd jobs," $500 income, a rented $15 wooden house (they did own a radio). He appears on Manitoba voters' lists to 1962.</p>
+  <p><b>Their graves — now found.</b> Both are buried in the Vigar family plot at <b>Beaconsfield Cemetery, Somerset, Manitoba</b> (the R.M. of Lorne town named for Somerset, England): <b>Percy — "Percival Frederick 'Percy' Vigor," d. 1965</b>; <b>Amelia — "Amelia Rhoda Biddlecombe Vigor," d. 1970.</b> Percy's brother <b>Victor S. (1881–1911)</b> — who had crossed with him in 1904 — lies in the same ground, having died only seven years after arriving.</p>`,
+  aside:{al:'Two brothers on one ship',html:`Percy didn't emigrate alone: the 1904 <b>SS <i>Tunisian</i></b> manifest carries <b>Percy</b> and his brother <b>Victor</b> (from the 1881 Greinton census) one near the other, both single labourers bound for Winnipeg — a textbook two-brother chain migration. Amelia followed the same year. Victor died young in 1911 and is buried beside Percy &amp; Amelia at Beaconsfield.`},
+  offspring:['Dudley Percival (1907) — the direct line','Gladys Minnie (1909)','Freda (1911)','Kenneth William (1913)','Lorna Vivian (1917)','Eileen Margaret (1919)'],
+  cite:`Emigration: Canada Incoming Passenger Lists (LAC T-498, img IMCANQC1865_T498-00338) — Percy Viger & Victor Vigar, SS Tunisian, arr. 23 Apr 1904 Halifax/St John → Winnipeg; Marriage: FreeBMD Wokingham 2c/1017 (1903). Homestead: 1916 Census (roll T-21927). 1931: LAC RG31, Treherne. Deaths/graves SOURCED: Find A Grave 261229854 (Percy, 1965) & 261229874 (Amelia, 1970), Beaconsfield Cemetery, Somerset MB. SOURCED throughout. <span class='todo'>Post-1970 MB death certs orderable for primary paper.</span>` },
+
+{ id:'charles_mabel_ashton', gen:3, ord:23, lineages:['ashton'], status:'sourced', kind:'couple',
+  tag:'m. 1917 Portsmouth', name:`Charles V. Ashton <em>&amp;</em> Mabel Grace Whiting`,
+  sub:`Portsmouth, England · m. Sep 1917`, parents:[],
+  facts:`<p>Mabel Grace Ashton's parents. <b>Charles V. Ashton</b> married <b>Mabel Grace Whiting</b> in the Sep quarter of 1917 at <b>Portsmouth</b> (GRO 2b/1154). Their daughter — <b>Mabel Grace Ashton</b>, born ~6 Dec 1920 at Portsmouth (GRO 2b/907) and <i>named after her mother</i> — later emigrated and married Dudley Vigar.</p>`,
+  aside:{al:'Portsmouth to Esquimalt',html:`Portsmouth is the Royal Navy's home port; Mabel's future husband Dudley worked at <b>H.M.C. Dockyard, Esquimalt</b>. Her line reads as a naval-town migration from one dockyard to another. (This corrects an earlier mistaken BC "Henry &amp; Emily Clara Ashton" guess.)`},
+  offspring:['Mabel Grace Ashton (b. 1920, m. Dudley Vigar) — the direct line'],
+  cite:`GRO indexes (FreeBMD): marriage <i>Charles V Ashton × Mabel G Whiting</i>, Portsmouth 2b/1154 (Sep 1917); birth <i>Mabel G Ashton</i>, mother Whiting, Portsmouth 2b/907 (Mar 1921 qtr). SOURCED.` },
+
+{ id:'john_ethel', gen:3, ord:27, lineages:['mcdonald','vogan'], status:'sourced', kind:'couple',
+  tag:'m. 1911 Ontario', name:`John Edgar McDonald <em>&amp;</em> Ethel Jemima Vogan`,
+  sub:`m. 5 Dec 1911 Hamilton · he b. ~1882 Dufferin · she b. 1887 Bruce Co.`, parents:['john_mcdonald_flora','thomas_vogan_eliza'],
+  facts:`<p>Bruce McDonald's parents — Sarah's maternal great-grandparents. <b>John Edgar McDonald</b> (b. ~1882, Mono Twp, Dufferin County) married <b>Ethel Jemima Vogan</b> (b. 3 Jan 1887, South Bruce, Bruce County) on <b>5 December 1911</b> in <b>Wentworth County, Hamilton, Ontario</b> — a Presbyterian wedding, entered on the register with the two of them one above the other.</p>
+  <p>By 1921 the family were in <b>Toronto at 274 Carlton Street</b>, where John Edgar worked as a <b>municipal fireman</b> and owned an eight-room brick house. Their children there included <b>Verna</b> (b. ~1913) and <b>Allan</b> (b. ~1916); <b>Bruce</b> followed at Toronto in <b>1927</b>, before the family's story moved west to British Columbia.</p>`,
+  aside:{al:'Register & census images, saved',html:`Three primary images are on record: the 1911 marriage register (McDonald &amp; Vogan one above the other); the <b>1891 census</b> of John Edgar as a boy in his Dufferin-County home; and the <b>1921 Toronto census</b> naming the fireman's household with Verna &amp; Allan — the record that confirmed the "Verna" Joel remembered.`},
+  offspring:['Verna M McDonald (b. ~1913)','Allan H McDonald (b. ~1916)','Bruce Edgar McDonald (b. 14 May 1927, Toronto) — the direct line'],
+  cite:`Ontario Marriages 1826-1943 (AO Reel 183): John Edgar McDonald × Ethel Vogan, 5 Dec 1911, Wentworth — his parents John McDonald & Flora McDougall, hers Thomas Vogan & Eliza Jane Smith. 1891 Census (Mono, Dufferin) & 1921 Census (274 Carlton, Toronto East — John E McDonald, 38, Fireman). SOURCED.` },
+
+{ id:'james_jean', gen:3, ord:30, lineages:['woods','taylor'], status:'sourced', kind:'couple',
+  tag:'m. 1928 Ontario', name:`James Edwin Woods <em>&amp;</em> Jean Kezia Taylor`,
+  sub:`m. 14 Jul 1928 York, Ontario · he b. 1899 Toronto · she b. 1902 England`, parents:['michael_woods_helen','joseph_taylor_mary'],
+  facts:`<p>Violet Lillian Woods's parents — Sarah's maternal great-grandparents, now confirmed from records (was family memory only). <b>James Edwin Woods</b> (b. ~1899, Toronto) married <b>Jean Kezia "Kaziah" Taylor</b> (b. ~1902, England) on <b>14 July 1928 in York, Ontario</b>. Their daughter <b>Violet Lillian Woods</b> was born about 1929–1930; like the McDonalds, the family later moved from Ontario to British Columbia.</p>`,
+  aside:{al:'Now documented — both sides',html:`The 1928 York marriage index names both parties and their parents: James Edwin's = <b>Michael Debaney Woods × Helen Rafferty</b> (Toronto); Jean Kezia's = <b>Joseph Taylor × Mary Buch</b> (England). Both maternal great-great-grandparent couples are therefore sourced.`},
+  offspring:['Violet Lillian Woods (b. ~1929/30, m. Bruce McDonald) — the direct line'],
+  cite:`Ontario, Canada, Marriages, 1826-1943 (Archives of Ontario, Reel 854): James Edwin Woods × Jean Kaziah Taylor, 14 Jul 1928, York — groom b. ~1899 Toronto (parents Michael Debaney Woods & Helen Rafferty); bride b. ~1902 England (parents Joseph Taylor & Mary Buch). SOURCED.` },
+
+{ id:'claude_annie', gen:3, ord:32, lineages:['vigar','groves'], status:'sourced', kind:'couple',
+  tag:'Percy’s brother', name:`Cyril "Claude" Vigar <em>&amp;</em> Annie Nancy Groves`,
+  sub:`Somerset → Portreeve, SK · he 1888–1976 · she 1899–1993`, parents:['henry_emma','edwin_catherine'],
+  facts:`<p><b>Cyril "Claude" Vigar</b> (24 Mar 1888 – 29 Dec 1976), Percy's brother, emigrated to Portreeve, Saskatchewan and married <b>Annie Nancy Groves</b>. In the 1911 census he heads the household <b>immediately adjacent</b> to Percy's — the neighbouring-brothers pattern that first pointed to Percy belonging to this Somerset family.</p>`,
+  cite:`<a href='https://www.findagrave.com/memorial/150305064' target='_blank' rel='noopener'>Find A Grave 150305064</a>; Portreeve Memorial Cemetery transcription; 1911 census (adjacent to Percy), id 65332. Annie Nancy DOB reads 14 Nov 1899 (FAG) vs 4 Nov 1899 elsewhere — flag.` },
+
+{ id:'gerald_maryellen', gen:3, ord:40, lineages:['vigar','groves'], status:'sourced', kind:'couple',
+  tag:'Percy’s brother', name:`Gerald Vaughan Vigar <em>&amp;</em> Mary Ellen Groves`,
+  sub:`Somerset → Portreeve, SK · he 1891–1962 · she 1892–1980`, parents:['henry_emma','edwin_catherine'],
+  facts:`<p><b>Gerald Vaughan Vigar</b> (14 Jul 1891 – 9 Sep 1962), the youngest documented brother, married <b>Mary Ellen Groves</b> — sister of Claude's wife. In 1911 he appears as "Brother" within Claude's household, next door to Percy. His son Victor carries his middle name, Vaughan.</p>`,
+  offspring:['Victor Vaughan Vigar (1915–1945)','…and probably others among the Portreeve younger generation'],
+  cite:`<a href='https://www.findagrave.com/memorial/150305135' target='_blank' rel='noopener'>Find A Grave 150305135</a>; Portreeve Memorial Cemetery transcription; 1911 census, id 65332.` },
+
+{ id:'william_groves', gen:3, ord:52, lineages:['groves'], status:'sourced', kind:'person', collateral:true,
+  name:`William E. Groves`, sub:`Portreeve, SK · 1889–1924`, parents:['edwin_catherine'],
+  facts:`<p>Eldest recorded son of Edwin & Catherine Groves; died young at Portreeve in 1924.</p>`,
+  cite:`Portreeve Memorial Cemetery transcription; Find A Grave.` },
+
+{ id:'richard_jean', gen:3, ord:58, lineages:['groves'], status:'sourced', kind:'couple', collateral:true,
+  name:`Richard H. Groves <em>&amp;</em> Jean Patrick`, sub:`Portreeve, SK · he 1891–1934 · she 1906–1980`, parents:['edwin_catherine'],
+  facts:`<p>Son of Edwin & Catherine Groves; married <b>Jean M. Patrick</b>. One half of the second sibling-pair marriage — his brother Robert married Jean's sister Margaret.</p>`,
+  cite:`Portreeve Memorial Cemetery transcription; Find A Grave.` },
+
+{ id:'robert_margaret', gen:3, ord:64, lineages:['groves'], status:'sourced', kind:'couple', collateral:true,
+  name:`Robert J. Groves <em>&amp;</em> Margaret Patrick`, sub:`Portreeve, SK · he 1899–1937 · she 1903–1997`, parents:['edwin_catherine'],
+  facts:`<p>Son of Edwin & Catherine Groves; married <b>Margaret S. Patrick</b>, sister of his brother Richard's wife Jean.</p>`,
+  cite:`Portreeve Memorial Cemetery transcription; Find A Grave.` },
+
+/* GEN 2 · grandparents; Dudley's siblings; Portreeve younger generation */
+{ id:'dudley_mabel', gen:2, ord:16, lineages:['vigar','ashton'], status:'sourced', kind:'couple',
+  tag:'grandfather', name:`Dudley Percival Vigar <em>&amp;</em> Mabel Grace Ashton`,
+  sub:`b. 31 May 1907, Manitoba · d. 27 Apr 1968, Victoria BC`, parents:['percy_amelia','charles_mabel_ashton'],
+  facts:`<p>Sarah's paternal grandfather, and the fully-sourced anchor of the line. <b>Dudley Percival Vigar</b> was born 31 May 1907 in the R.M. of Lorne, Manitoba, and died 27 Apr 1968 at Victoria, BC, age 60 — a driver at <b>H.M.C. Dockyard, Esquimalt</b>, living at Langford; cremated at Royal Oak Burial Park. His widow and death-informant was <b>Mabel Grace Ashton</b> (b. Portsmouth 1920, d. 1997).</p>
+  <p><b>Two marriages.</b> Before Mabel, Dudley married <b>first in Manitoba</b>: the Manitoba Vital Statistics index records <b>"Dudley Percy Vigar" marrying Elizabeth Irene Parker at Winnipeg on 24 March 1941</b> (reg. 1941,011214) — five years before he moved to BC (~1946). Mabel Grace Ashton (the Portsmouth-born Ashton line) was therefore a <b>later, second wife</b> he married in British Columbia.</p>
+  <p>Among his children was <b>Kenneth Vigar</b> — Sarah's father.</p>`,
+  offspring:['Kenneth Vigar (Sarah’s father) — living','…and other living children (kept private)'],
+  aside:{al:'Which wife was Kenneth’s mother?',html:`Dudley now has <b>two</b> documented wives — Elizabeth Irene Parker (Winnipeg, 1941) and Mabel Grace Ashton (later, BC). Whether Sarah's father Kenneth is a child of the first (Manitoba) or second (BC) marriage is an <b>open question for the family</b> to settle; it isn't researched here (Kenneth is living).`},
+  cite:`Manitoba Vital Statistics birth reg. 1907,005060; marriage reg. 1941,011214 (Dudley Percy Vigar × Elizabeth Irene Parker, Winnipeg, 24 Mar 1941). BC death reg. 1968-09-006141 (BC Archives, mfilm B13289). Mabel Grace Ashton death: BC Archives reg. 1997-09-018668.` },
+
+{ id:'bruce_violet', gen:2, ord:24, lineages:['mcdonald','woods'], status:'sourced', kind:'couple',
+  tag:'maternal grandparents', name:`Bruce Edgar McDonald <em>&amp;</em> Violet Lillian Woods`,
+  sub:`m. 23 May 1953 Toronto · he 1927 Toronto – 2017 Calgary · she ~1930 – 2009 Sechelt`, parents:['john_ethel','james_jean'],
+  facts:`<p>Sarah's maternal grandparents — Kerri's parents. <b>Bruce Edgar McDonald</b> was born <b>14 May 1927 at Toronto</b> and died <b>14 March 2017 at Calgary</b>. <b>Violet Lillian Woods</b> died <b>25 April 2009 at Sechelt</b>, aged 79 (so born ~1929–1930). Both were children of Ontario families: they <b>married at Toronto on 23 May 1953</b> (announced in a Toronto paper that May) before moving west. They raised their family in the Victoria area, and in 1979 bought the <b>Patricia Theatre</b> in the Townsite of <b>Powell River</b> — one of Canada's oldest continuously operating cinemas (present building 1928); their son Bob ran it for years. They later lived at <b>Sechelt</b>.</p>`,
+  aside:{al:'The Patricia Theatre',html:`A living landmark of the Powell River Townsite (the national historic mill village built by the Powell River Company). The family's tenure running it is a wonderful thread down the maternal line.`},
+  offspring:['Kerri (Sarah’s mother) — living','Robert "Bob" (ran the Patricia Theatre; d. Vancouver, 2005–2008)','…and other living daughters (kept private)'],
+  cite:`Marriage: Canada, Newspapers.com Marriage Index — Violet Lillian Woods × <b>Bruce Edgar McDonald</b>, 23 May 1953 (announced 13 May 1953, Toronto). Violet: BC death certificate (d. 25 Apr 2009, Sechelt, age 79). Bruce: Funeral Director's proof-of-death (b. 14 May 1927 Toronto; d. 14 Mar 2017 Calgary). SOURCED. <span class='todo'>Note: Bruce's middle name "Edgar" carries down from his father John <b>Edgar</b> McDonald.</span>` },
+
+{ id:'gladys', gen:2, ord:2, lineages:['vigar'], status:'sourced', kind:'person',
+  name:`Gladys Minnie Vigar`, sub:`b. 13 Feb 1909, South Norfolk, MB`, parents:['percy_amelia'],
+  facts:`<p>Dudley's sister; appears as "Gladys" on the 1911 census page beside her parents.</p>`,
+  cite:`MB Vital Statistics birth index, reg. 1909,013833; 1911 census, id 65332.` },
+{ id:'freda', gen:2, ord:5, lineages:['vigar'], status:'sourced', kind:'person',
+  name:`Freda Vigar`, sub:`b. 4 Jul 1911, South Norfolk, MB · m. 1941 Salontay`, parents:['percy_amelia'],
+  facts:`<p>Dudley's sister. As "<b>Frederica Imogene Vigar</b>" she married <b>Alexander Salontay</b> at Winnipeg on 24 June 1941 — three months after her brother Dudley's own Winnipeg marriage, so two Vigar siblings wed in the city within a single spring.</p>`,
+  cite:`MB Vital Statistics birth index, reg. 1911,002763; marriage index reg. 1941,023466 (Frederica Imogene Vigar × Alexander Salontay, Winnipeg, 24 Jun 1941).` },
+{ id:'kennethW', gen:2, ord:8, lineages:['vigar'], status:'sourced', kind:'person',
+  name:`Kenneth William Vigar`, sub:`b. 4 Aug 1913, South Norfolk, MB`, parents:['percy_amelia'],
+  facts:`<p>Dudley's brother — <b>not</b> to be confused with Sarah's father Kenneth Vigar (Dudley's son), a different man a generation down who reuses the name.</p>`,
+  cite:`MB Vital Statistics birth index, reg. 1913,044444.` },
+{ id:'lorna', gen:2, ord:11, lineages:['vigar'], status:'sourced', kind:'person',
+  name:`Lorna Vivian Vigar`, sub:`b. 12 Jun 1917, South Norfolk, MB`, parents:['percy_amelia'],
+  facts:`<p>Dudley's sister.</p>`, cite:`MB Vital Statistics birth index, reg. 1917,032492.` },
+{ id:'eileen', gen:2, ord:14, lineages:['vigar'], status:'sourced', kind:'person',
+  name:`Eileen Margaret Vigar`, sub:`b. 18 Mar 1919, South Norfolk, MB`, parents:['percy_amelia'],
+  facts:`<p>Dudley's youngest sister.</p>`, cite:`MB Vital Statistics birth index, reg. 1919,014571.` },
+
+{ id:'victor', gen:2, ord:32, lineages:['vigar','groves'], status:'reported', kind:'person', collateral:true,
+  name:`Victor Vaughan Vigar`, sub:`Portreeve, SK · 4 Dec 1915 – 18 Aug 1945`, parents:['gerald_maryellen'],
+  facts:`<p>Assigned to <b>Gerald Vaughan Vigar & Mary Ellen</b>: he carries his father's middle name "Vaughan", and Annie Nancy Groves (b. 1899) was far too young to be his 1915 mother. He died 18 Aug 1945 — three days after V-J Day — and lies at Portreeve (no overseas-burial note, so not a war-grave commemoration).</p>`,
+  cite:`Find A Grave 150305172 (Portreeve). Parentage REPORTED (onomastic + age exclusion). No CWGC/VAC service record located.` },
+{ id:'winnifred', gen:2, ord:35, lineages:['vigar','groves'], status:'reported', kind:'person', collateral:true,
+  name:`Winnifred Irene Vigar`, sub:`Portreeve, SK · 1918–2001`, parents:['claude_annie','gerald_maryellen'],
+  facts:`<p>Of the Portreeve younger generation — a child of Claude or Gerald (to confirm which).</p>`,
+  cite:`Find A Grave 150305277 (Portreeve).` },
+{ id:'dennis', gen:2, ord:38, lineages:['vigar','groves'], status:'reported', kind:'person', collateral:true,
+  name:`Dennis Leonard Vigar`, sub:`Portreeve, SK · 1919–2000`, parents:['claude_annie','gerald_maryellen'],
+  facts:`<p>Of the Portreeve younger generation — a son of Claude or Gerald (to confirm which).</p>`,
+  cite:`Find A Grave 150305080 (Portreeve).` },
+{ id:'dulcie', gen:2, ord:41, lineages:['vigar','groves'], status:'reported', kind:'person', collateral:true,
+  name:`Dulcie May Vigar`, sub:`Portreeve, SK · 1920–1955`, parents:['claude_annie','gerald_maryellen'],
+  facts:`<p>Of the Portreeve younger generation — a daughter of Claude or Gerald (to confirm which).</p>`,
+  cite:`Find A Grave 150305116 (Portreeve).` },
+{ id:'doris', gen:2, ord:44, lineages:['vigar','groves'], status:'reported', kind:'person', collateral:true,
+  name:`Doris Vigar`, sub:`Portreeve, SK · 1924–1994`, parents:['claude_annie','gerald_maryellen'],
+  facts:`<p>Of the Portreeve younger generation — a daughter of Claude or Gerald (to confirm which).</p>`,
+  cite:`Find A Grave 150305099 (Portreeve).` },
+{ id:'infants', gen:2, ord:47, lineages:['vigar','groves'], status:'gap', kind:'person', collateral:true,
+  name:`Four Vigar infants`, sub:`Portreeve, SK · 1930, 1932, 1933, 1936`, parents:['claude_annie','gerald_maryellen'],
+  facts:`<p>Four infant Vigar burials at Portreeve. Earlier mis-transcribed as sharing the name "Vernon"; in fact four separate infants (a "Roy"/son 1930, sons 1932 & 1933, a daughter 1936). Children of Claude or Gerald.</p>`,
+  cite:`Find A Grave 150304970 / 150304996 / 150305006 / 150305012 (Portreeve).` },
+
+/* GEN 1 · Sarah's parents (living exception) */
+{ id:'kenneth_kerri', gen:1, ord:20, lineages:['vigar','mcdonald'], status:'reported', kind:'couple',
+  tag:'Sarah’s parents', name:`Kenneth Vigar <em>&amp;</em> Kerri McDonald`,
+  sub:`Sarah's parents · living`, parents:['dudley_mabel','bruce_violet'],
+  facts:`<p>Sarah's parents. <b>Kenneth Vigar</b> — a son of Dudley Percival Vigar & Mabel Grace Ashton — and <b>Kerri McDonald</b>, daughter of Bruce McDonald & Violet Lillian Woods of the Patricia Theatre, Powell River. They are living, and are the one exception to the project's privacy rule (included at Joel's request); shown by name only, with no further private detail.</p>`,
+  cite:`Family testimony (Joel), Jul 2026. REPORTED.` },
+
+/* GEN 0 · subject */
+{ id:'sarah', gen:0, ord:20, lineages:['vigar'], status:'gap', kind:'subject', tag:'Subject',
+  name:`Sarah Vigar`, sub:`birth date & place: to record`, parents:['kenneth_kerri'],
+  facts:`<p>The subject of the project. With her parents now established as Kenneth Vigar & Kerri McDonald, the Sarah → Dudley link is closed. Her own birth date and place remain to be recorded.</p>`,
+  cite:`<span class='todo'>To do — record Sarah's own birth/baptism details (Pending #1).</span>` },
+
+];
+</script>
+
+<script>
+(function(){
+  const LINVAR={vigar:'var(--vigar)',prince:'var(--prince)',biddlecombe:'var(--biddlecombe)',groves:'var(--groves)',ashton:'var(--ashton)',mcdonald:'var(--mcdonald)',woods:'var(--woods)',vogan:'var(--vogan)',taylor:'var(--taylor)',smith:'var(--smith)',rafferty:'var(--rafferty)',mcdougall:'var(--mcdougall)',wyburn:'var(--wyburn)'};
+  const tree=document.getElementById('tree');
+  const wires=document.getElementById('wires');
+  const byId={}; NODES.forEach(n=>byId[n.id]=n);
+  const detailNodes=NODES.filter(n=>n.kind!=='private');
+  const activeLin={vigar:true,prince:true,biddlecombe:true,groves:true,ashton:true,mcdonald:true,woods:true,vogan:true,taylor:true,smith:true,rafferty:true,mcdougall:true,wyburn:true};
+  let showColl=false, query='';
+
+  /* Relationship of each card to Sarah (the subject). Convention: a grandparent's
+     sibling is a "great aunt/uncle"; a great-grandparent's sibling is a
+     "great-great aunt/uncle"; a grandparent's first cousin is a "first cousin
+     twice removed". Groves cards are married-in kin with no blood tie to Sarah. */
+  const REL={
+    sarah:'Subject',
+    kenneth_kerri:'Parents',
+    dudley_mabel:'Grandparents', bruce_violet:'Grandparents',
+    percy_amelia:'Great-grandparents', charles_mabel_ashton:'Great-grandparents',
+    john_ethel:'Great-grandparents', james_jean:'Great-grandparents',
+    henry_emma:'2× great-grandparents', william_biddlecombe:'2× great-grandparents',
+    john_mcdonald_flora:'2× great-grandparents', thomas_vogan_eliza:'2× great-grandparents',
+    michael_woods_helen:'2× great-grandparents', joseph_taylor_mary:'2× great-grandparents',
+    thomas_emily:'3× great-grandparents', mary_ann_prince:'3× great-grandparents',
+    george_mcdonald_joanna:'3× great-grandparents', donald_mcdougall_margaret:'3× great-grandparents',
+    george_vogan_sarah:'3× great-grandparents', john_smith_martha:'3× great-grandparents',
+    james_woods_emily:'3× great-grandparents', james_rafferty_mary:'3× great-grandparents',
+    robert_susanna_wyburn:'3× great-grandparents',
+    william_ann:'4× great-grandparents',
+    gladys:'Great aunt', freda:'Great aunt', kennethW:'Great uncle',
+    lorna:'Great aunt', eileen:'Great aunt',
+    claude_annie:'Great-great uncle & aunt', gerald_maryellen:'Great-great uncle & aunt',
+    edwin_catherine:'In-laws (Groves)', william_groves:'In-law (Groves)',
+    richard_jean:'In-law (Groves)', robert_margaret:'In-law (Groves)',
+    victor:'First cousin 2× removed', winnifred:'First cousin 2× removed',
+    dennis:'First cousin 2× removed', dulcie:'First cousin 2× removed',
+    doris:'First cousin 2× removed', infants:'First cousins 2× removed',
+  };
+  const relLabel=n=>REL[n.id]||(n.gen===0?'Subject':genLabel(n.gen).split('·')[0].trim());
+
+  const genLabel=g=>({0:'Subject',1:"Sarah's parents",
+    2:'Grandparents · both sides & the Vigar siblings',3:'Great-grandparents · Somerset, Portsmouth & Ontario lines',
+    4:'2× great-grandparents · Somerset, Ontario, Toronto & Berkshire lines',5:'3× great-grandparents · Vigar & Prince (Somerset) and the Ontario, Irish & Somerset maiden lines',6:'4× great-grandparents · earliest Vigars'}[g]||('Generation '+g));
+
+  function stripe(n){
+    const ls=n.lineages||[];
+    if(ls.length>=2) return `linear-gradient(to bottom, ${LINVAR[ls[0]]} 0 50%, ${LINVAR[ls[1]]} 50% 100%)`;
+    if(ls.length===1) return LINVAR[ls[0]];
+    return 'var(--pencil)';
+  }
+  function chipOf(s){return s==='sourced'?['sourced','Sourced']:s==='reported'?['reported','Reported']:['gap','To prove'];}
+
+  const gens=[...new Set(NODES.map(n=>n.gen))].sort((a,b)=>b-a);
+  gens.forEach(g=>{
+    const band=document.createElement('div'); band.className='band'; band.dataset.gen=g;
+    const lab=document.createElement('div'); lab.className='band-label'; lab.textContent=genLabel(g); band.appendChild(lab);
+    NODES.filter(n=>n.gen===g).sort((a,b)=>a.ord-b.ord).forEach(n=>{
+      const c=document.createElement('div');
+      c.className='node'+(n.kind==='subject'?' subject':'')+(n.collateral?' collateral':'');
+      c.dataset.id=n.id;
+      const [cc,cl]=chipOf(n.status);
+      c.innerHTML=`${n.tag?`<span class="n-tag">${n.tag}</span>`:''}
+        <div class="n-top"><span class="n-gen">${relLabel(n)}</span></div>
+        <div class="n-name">${n.name}</div>
+        ${n.sub?`<div class="n-sub">${n.sub}</div>`:''}
+        <div class="n-chip"><span class="chip ${cc}">${cl}</span></div>`;
+      c.addEventListener('click',()=>openDrawer(n.id));
+      c.addEventListener('mouseenter',()=>highlight(n.id));
+      c.addEventListener('mouseleave',()=>highlight(null));
+      band.appendChild(c);
+    });
+    tree.appendChild(band);
+  });
+  const strip=document.createElement('style');
+  strip.textContent=NODES.map(n=>`.node[data-id="${n.id}"]::before{background:${stripe(n)};}`).join('');
+  document.head.appendChild(strip);
+
+  function visible(id){
+    const n=byId[id]; if(!n) return false;
+    if(n.collateral && !showColl) return false;
+    const el=tree.querySelector('.node[data-id="'+id+'"]');
+    return el && el.style.display!=='none';
+  }
+  function drawWires(){
+    const tb=tree.getBoundingClientRect();
+    wires.setAttribute('width',tree.scrollWidth); wires.setAttribute('height',tree.scrollHeight);
+    wires.style.width=tree.scrollWidth+'px'; wires.style.height=tree.scrollHeight+'px';
+    let paths='';
+    NODES.forEach(n=>{
+      if(!n.parents||!n.parents.length||!visible(n.id)) return;
+      const cb=tree.querySelector('.node[data-id="'+n.id+'"]').getBoundingClientRect();
+      const cx=cb.left+cb.width/2-tb.left, cy=cb.top-tb.top;
+      n.parents.forEach(pid=>{
+        if(!visible(pid)) return;
+        const pb=tree.querySelector('.node[data-id="'+pid+'"]').getBoundingClientRect();
+        const px=pb.left+pb.width/2-tb.left, py=pb.bottom-tb.top, my=(cy+py)/2;
+        paths+=`<path data-c="${n.id}" data-p="${pid}" d="M${cx},${cy} C${cx},${my} ${px},${my} ${px},${py}"/>`;
+      });
+    });
+    wires.innerHTML=paths;
+  }
+
+  function ancestry(id,set){ set.add(id); (byId[id].parents||[]).forEach(p=>{ if(visible(p)) ancestry(p,set); }); return set; }
+  function highlight(id){
+    const nodes=tree.querySelectorAll('.node');
+    if(!id){ nodes.forEach(el=>el.classList.remove('dim')); wires.querySelectorAll('path').forEach(p=>p.classList.remove('hl')); return; }
+    const chain=ancestry(id,new Set());
+    nodes.forEach(el=>{ el.classList.toggle('dim', el.style.display!=='none' && !chain.has(el.dataset.id)); });
+    wires.querySelectorAll('path').forEach(p=>{ p.classList.toggle('hl', chain.has(p.dataset.c)&&chain.has(p.dataset.p)); });
+  }
+
+  function applyFilter(){
+    NODES.forEach(n=>{
+      const el=tree.querySelector('.node[data-id="'+n.id+'"]'); if(!el) return;
+      const linOK=(n.lineages||[]).some(l=>activeLin[l]) || n.kind==='subject';
+      const collOK=!n.collateral || showColl;
+      const q=query.trim().toLowerCase();
+      const qOK=!q || (n.name+' '+(n.sub||'')).toLowerCase().replace(/<[^>]+>/g,'').includes(q);
+      el.style.display=(linOK&&collOK&&qOK)?'block':'none';
+    });
+    requestAnimationFrame(drawWires);
+  }
+
+  const scrim=document.getElementById('scrim'),drawer=document.getElementById('drawer');
+  let curIdx=0;
+  function openDrawer(id){ const i=detailNodes.findIndex(n=>n.id===id); if(i<0)return; curIdx=i; renderDrawer(); scrim.classList.add('on'); drawer.classList.add('on'); }
+  function closeDrawer(){ scrim.classList.remove('on'); drawer.classList.remove('on'); }
+  function renderDrawer(){
+    const n=detailNodes[curIdx];
+    document.getElementById('dGen').textContent=relLabel(n);
+    document.getElementById('dName').innerHTML=n.name;
+    document.getElementById('dSub').textContent=n.sub||'';
+    const [cc,cl]=chipOf(n.status);
+    document.getElementById('dStamp').innerHTML=`<span class="chip ${cc}">${cl}</span>`;
+    let html=(n.facts||'');
+    if(n.aside) html+=`<div class="aside"><span class="al">${n.aside.al}</span>${n.aside.html}</div>`;
+    if(n.offspring&&n.offspring.length) html+=`<h4>Children</h4><ul>${n.offspring.map(o=>`<li>${o}</li>`).join('')}</ul>`;
+    if(n.cite) html+=`<h4>Sources</h4><p style="font-size:12.5px;color:var(--ink-soft)">${n.cite}</p>`;
+    document.getElementById('dBody').innerHTML=html;
+    document.getElementById('dBody').scrollTop=0;
+    document.getElementById('dCount').textContent=`${curIdx+1} / ${detailNodes.length}`;
+  }
+  document.getElementById('dClose').onclick=closeDrawer;
+  scrim.onclick=closeDrawer;
+  document.getElementById('dPrev').onclick=()=>{curIdx=(curIdx-1+detailNodes.length)%detailNodes.length;renderDrawer();};
+  document.getElementById('dNext').onclick=()=>{curIdx=(curIdx+1)%detailNodes.length;renderDrawer();};
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape')closeDrawer();
+    if(drawer.classList.contains('on')){ if(e.key==='ArrowLeft')document.getElementById('dPrev').click();
+      if(e.key==='ArrowRight')document.getElementById('dNext').click(); } });
+
+  document.getElementById('search').addEventListener('input',e=>{ query=e.target.value; applyFilter(); });
+  document.querySelectorAll('.fchip').forEach(b=>b.addEventListener('click',()=>{
+    const lin=b.dataset.lin, on=b.dataset.on==='1'; b.dataset.on=on?'0':'1'; activeLin[lin]=!on; applyFilter();
+  }));
+  const collBtn=document.getElementById('collToggle');
+  collBtn.addEventListener('click',()=>{ showColl=!showColl; collBtn.dataset.on=showColl?'1':'0';
+    collBtn.textContent=showColl?'Hide Groves in-laws & Portreeve kin':'Show Groves in-laws & Portreeve kin';
+    document.body.classList.toggle('show-coll',showColl); applyFilter(); });
+
+  window.addEventListener('resize',()=>requestAnimationFrame(drawWires));
+  document.fonts&&document.fonts.ready&&document.fonts.ready.then(()=>drawWires());
+  applyFilter(); drawWires(); setTimeout(drawWires,300);
+})();
+</script>
+</body>
+</html>
