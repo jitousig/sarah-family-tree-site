@@ -189,7 +189,7 @@ footer{max-width:1180px;margin:0 auto;padding:14px 8px 40px;color:var(--ink-soft
 </div>
 
 <footer>
-  A presentation layer over <b>research-dossier.md</b>. Grades: <b>Sourced</b> (primary record / firm correlation), <b>Reported</b> (secondary source / strong candidate), <b>To&nbsp;prove</b> (inference or open gap). Sarah's parents (Kenneth Vigar &amp; Kerri McDonald) are the one living generation shown, at Joel's request; all other living people are omitted. Married pairs share one card; the left stripe shows the family line(s). Built 2026-07-12_0030 (Session 13 — the <b>Taylor emigration</b> resolved: the family immigrated to Canada in <b>1905</b> and settled on <b>Manning Avenue, Toronto</b> (1921 census); the 1928 marriage register adds Jean's Toronto address and family witnesses; <b>Charles Buck</b> found to have been alive in 1895 and a <b>chocolate manufacturer</b> (1895 St Philip Stepney register), with siblings George &amp; Nellie Buck; and <b>Emma Charlotte Prince</b>'s mother named as <b>Mary Ann Bull</b> (m. George Prince, Chard 1855). Session 12 broke the Taylor–Buck wall (Jane Kezia Taylor, b. 1900 Shoreditch); Session 11 added Mabel Ashton's three sisters and Verna/Allan McDonald.) · self-contained.
+  A presentation layer over <b>research-dossier.md</b>. Grades: <b>Sourced</b> (primary record / firm correlation), <b>Reported</b> (secondary source / strong candidate), <b>To&nbsp;prove</b> (inference or open gap). Sarah's parents (Kenneth Vigar &amp; Kerri McDonald) are the one living generation shown, at Joel's request; all other living people are omitted. Married pairs share one card; the left stripe shows the family line(s). Built 2026-07-12_0214 (Session 14 — the <b>Ashton &amp; Whiting 2× great-grandparents added</b>: Charles Vincent Ashton's parents <b>George Robert Ashton &amp; Louisa</b> of <b>Doncaster, Yorkshire</b>, and Mabel Grace Whiting's parents <b>George David Whiting &amp; Emily</b> of <b>Portsmouth</b> — both from the 1901 England census; the Ashton line is now traced to the <b>West Riding</b>, and Charles is fixed as <b>Charles Vincent Ashton, b. 1893 Doncaster – d. 1971 Victoria</b>, the family crossing to <b>Peace River, Alberta in 1929</b>. Session 13 resolved the <b>Taylor emigration</b> (to Toronto's Manning Avenue, 1905) and found <b>Charles Buck</b> a living 1895 chocolate manufacturer; Session 12 broke the Taylor–Buck wall (Jane Kezia Taylor, b. 1900 Shoreditch); Session 11 added Mabel Ashton's three sisters and Verna/Allan McDonald.) · self-contained.
 </footer>
 
 <div class="scrim" id="scrim"></div>
@@ -357,6 +357,21 @@ const NODES = [
   offspring:['Joseph Taylor (b. 1897, Bethnal Green)','Charles Taylor (b. 1899, Shoreditch; a Toronto conductor, m. Annie)','Jane "Jean" Kezia Taylor (b. Jul–Sep 1900, Shoreditch; m. James Edwin Woods 1928) — the direct line','Mary Taylor (b. ~1905) — a Canadian-era younger daughter'],
   cite:`Birth: FindMyPast <i>England &amp; Wales Births 1837-2006</i> — Jane Kezia Taylor, reg. Q3 1900, Shoreditch, London, GRO 1C/19, mother's maiden name <b>Buck</b>. Image: Shoreditch household: 1901 Census, 77 Crondall St (FindMyPast GBC/1901/0005645001). Image: Marriage: London C of E Marriages 1754-1941 (Ancestry coll. 1623, rec 5378135; LMA <b>P93/PHI/019</b>, register image) — Joseph Taylor (French polisher, of 40 Lindley St; father Joseph Taylor, <b>general dealer</b>) × Mary Ann Buck (of 40 Lindley St; father <b>Charles Buck, "chocolate manufacturer"</b>), 1 Jul 1895, St Philip Stepney; witnesses <b>George &amp; Nellie Buck</b>. Image: Emigration &amp; Toronto household: 1921 Census of Canada (Ancestry coll. 8991, rec 1552883) — Joseph Taylor, 779 Manning Ave, Toronto, <b>immigrated 1905</b>, polisher; wife Mary; son Charles (conductor) &amp; wife Annie; daughter Mary. Image: SOURCED. <span class='todo'>Next: Charles Buck's own household (he was living, a chocolate/confectionery man of East London, in 1895) — via the 1895 GRO marriage certificate or Mary Ann Buck's GRO birth cert.</span>` },
 
+/* GEN 4 · Ashton & Whiting — Mabel's grandparents (added Session 14, SOURCED) */
+{ id:'george_robert_ashton', gen:4, ord:21, lineages:['ashton'], status:'sourced', kind:'couple',
+  tag:'Charles Vincent’s parents', name:`George Robert Ashton <em>&amp;</em> Louisa Ashton`,
+  sub:`Balby-with-Hexthorpe, Doncaster, Yorkshire · he b. ~1870 · she b. ~1872`, parents:[],
+  facts:`<p>Charles Vincent Ashton's parents — a <b>Doncaster, Yorkshire</b> family, which places Sarah's Ashton line in the <b>West Riding, not Portsmouth</b>. The <b>1901 census</b> finds the household at <b>Balby-with-Hexthorpe</b> (Doncaster): <b>George Robert Ashton</b> (Head, 31, b. ~1870) and <b>Louisa</b> (29, b. ~1872) with six children — Florence (1889), Jeanette (1892), <b>Charles Vincent</b> (1893), Robert David (1897) and George William (1900). Charles later went south and was <b>boarding in Portsmouth by 1911</b>, which is how he came to marry Mabel Whiting there in 1917.</p>`,
+  offspring:['Florence (b. 1889)','Jeanette (b. 1892)','Charles Vincent Ashton (b. 1893, m. Mabel Grace Whiting) — the direct line','Robert David (b. 1897)','George William (b. 1900)'],
+  cite:`1901 England Census, Balby-with-Hexthorpe, Doncaster, Yorkshire (RG13/4404, folio 145, page 39; Doncaster RD / Tickhill sub-district). SOURCED. <span class='todo'>Louisa's maiden name &amp; both gen-5 sets still open.</span>` },
+
+{ id:'george_david_whiting', gen:4, ord:25, lineages:['ashton'], status:'sourced', kind:'couple',
+  tag:'Mabel Grace’s parents', name:`George David Whiting <em>&amp;</em> Emily M. Whiting`,
+  sub:`Mid-Southsea, Portsmouth, Hampshire · he b. ~1871 · she b. ~1872`, parents:[],
+  facts:`<p>Mabel Grace Whiting's parents — a <b>Portsmouth</b> (Southsea) family. The <b>1901 census</b> places them in <b>St Bartholomew parish, Mid-Southsea</b>: <b>George David Whiting</b> (Head, 30, b. ~1871) and <b>Emily M.</b> (29, b. ~1872) with five children — George William (1890), <b>Mabel G.</b> (1892), Ethel F. (1894), Arthur A. (1895) and Edward Louis (1899). Their daughter Mabel married the Yorkshire-born Charles Vincent Ashton at Portsmouth in 1917.</p>`,
+  offspring:['George William (b. 1890)','Mabel Grace Whiting (b. 1892, m. Charles Vincent Ashton) — the direct line','Ethel F. (b. 1894)','Arthur A. (b. 1895)','Edward Louis (b. 1899)'],
+  cite:`1901 England Census, St Bartholomew, Mid-Southsea, Portsmouth, Hampshire (RG13/1007, folio 99, page 19; schedule 129). SOURCED. <span class='todo'>Emily's maiden name &amp; both gen-5 sets still open.</span>` },
+
 /* GEN 3 · great-grandparents & in-law lines */
 { id:'percy_amelia', gen:3, ord:12, lineages:['vigar','biddlecombe'], status:'sourced', kind:'couple',
   tag:'direct line', name:`Percy Vigar <em>&amp;</em> Amelia Rhoda Biddlecombe`,
@@ -371,12 +386,13 @@ const NODES = [
   cite:`Emigration: Canada Incoming Passenger Lists (LAC T-498, img IMCANQC1865_T498-00338) — Percy Viger & Victor Vigar, SS Tunisian, arr. 23 Apr 1904 Halifax/St John → Winnipeg; Marriage: FreeBMD Wokingham 2c/1017 (1903). Homestead: 1916 Census (roll T-21927). 1931: LAC RG31, Treherne. Deaths/graves SOURCED: Find A Grave 261229854 (Percy, 1965) & 261229874 (Amelia, 1970), Beaconsfield Cemetery, Somerset MB. SOURCED throughout. <span class='todo'>Post-1970 MB death certs orderable for primary paper.</span>` },
 
 { id:'charles_mabel_ashton', gen:3, ord:23, lineages:['ashton'], status:'sourced', kind:'couple',
-  tag:'m. 1917 Portsmouth', name:`Charles V. Ashton <em>&amp;</em> Mabel Grace Whiting`,
-  sub:`Portsmouth, England · m. Sep 1917`, parents:[],
-  facts:`<p>Mabel Grace Ashton's parents. <b>Charles V. Ashton</b> married <b>Mabel Grace Whiting</b> in the Sep quarter of 1917 at <b>Portsmouth</b> (GRO 2b/1154). Their daughter — <b>Mabel Grace Ashton</b>, born ~6 Dec 1920 at Portsmouth (GRO 2b/907) and <i>named after her mother</i> — later emigrated and married Dudley Vigar.</p>`,
-  aside:{al:'Portsmouth to Esquimalt',html:`Portsmouth is the Royal Navy's home port; Mabel's future husband Dudley worked at <b>H.M.C. Dockyard, Esquimalt</b>. Her line reads as a naval-town migration from one dockyard to another. (This corrects an earlier mistaken BC "Henry &amp; Emily Clara Ashton" guess.)`},
-  offspring:['Mabel Grace Ashton (b. 1920, m. Dudley Vigar) — the direct line'],
-  cite:`GRO indexes (FreeBMD): marriage <i>Charles V Ashton × Mabel G Whiting</i>, Portsmouth 2b/1154 (Sep 1917); birth <i>Mabel G Ashton</i>, mother Whiting, Portsmouth 2b/907 (Mar 1921 qtr). SOURCED.` },
+  tag:'m. 1917 Portsmouth', name:`Charles Vincent Ashton <em>&amp;</em> Mabel Grace Whiting`,
+  sub:`Portsmouth 1917 → Peace River, Alberta 1929 · he b. 1893 Doncaster – d. 1971 Victoria · she b. 1892 Portsmouth`, parents:['george_robert_ashton','george_david_whiting'],
+  facts:`<p>Mabel Grace Ashton's parents. <b>Charles Vincent Ashton</b> — born at <b>Doncaster, Yorkshire in 1893</b> — married <b>Mabel Grace Whiting</b> (b. 1892, Portsmouth) in the Sep quarter of 1917 at <b>Portsmouth</b> (GRO 2b/1154). Their daughter <b>Mabel Grace Ashton</b>, born ~6 Dec 1920 at Portsmouth (GRO 2b/907) and <i>named after her mother</i>, later emigrated and married Dudley Vigar.</p>
+  <p><b>The family crossed to Canada in 1929</b> — the 1931 census finds them in the <b>Peace River country of Alberta</b> (Mercoal). Charles lived until <b>17 March 1971</b>, dying at <b>Victoria, B.C.</b> — the same city his daughter and son-in-law had settled in; his obituary names daughter <b>Sylvia (Ashton) Drysdale</b>, one of Mabel's three sisters.</p>`,
+  aside:{al:'Yorkshire & Portsmouth, then Canada',html:`The marriage joined two regions: <b>Charles</b> was a Doncaster (West Riding) man who had drifted south and was <b>boarding in Portsmouth</b> by 1911, while <b>Mabel Grace Whiting</b> was Portsmouth-born and -bred. After 1917 they followed the family pattern out to Canada — the Peace River in 1929, and eventually to Vancouver Island. (This corrects an earlier mistaken BC "Henry &amp; Emily Clara Ashton" guess.)`},
+  offspring:['Mabel Grace Ashton (b. 1920, m. Dudley Vigar) — the direct line','Sylvia (Ashton) Drysdale, Pauline (Ashton) Norman, Vickie (Ashton) Price — her sisters'],
+  cite:`GRO indexes: marriage <i>Charles V Ashton × Mabel G Whiting</i>, Portsmouth 2b/1154 (Sep 1917); birth <i>Mabel G Ashton</i>, mother Whiting, Portsmouth 2b/907 (Mar 1921 qtr); Charles's birth Q1 1893, Doncaster. Charles Vincent Ashton d. 17 Mar 1971, Victoria BC (Newspapers.com obituary index; names dau. Sylvia Drysdale). Family in Canada: 1931 Census of Canada — Charles Vincent Ashton, b. England, arrived 1929, Mercoal, Peace River, Alberta. His &amp; Mabel's own 1901-census households are filed under their parents' cards. SOURCED.` },
 
 { id:'john_ethel', gen:3, ord:27, lineages:['mcdonald','vogan'], status:'sourced', kind:'couple',
   tag:'m. 1911 Ontario', name:`John Edgar McDonald <em>&amp;</em> Ethel Jemima Vogan`,
@@ -549,6 +565,7 @@ const NODES = [
     henry_emma:'2× great-grandparents', william_biddlecombe:'2× great-grandparents',
     john_mcdonald_flora:'2× great-grandparents', thomas_vogan_eliza:'2× great-grandparents',
     michael_woods_helen:'2× great-grandparents', joseph_taylor_mary:'2× great-grandparents',
+    george_robert_ashton:'2× great-grandparents', george_david_whiting:'2× great-grandparents',
     thomas_emily:'3× great-grandparents', mary_ann_prince:'3× great-grandparents',
     george_mcdonald_joanna:'3× great-grandparents', donald_mcdougall_margaret:'3× great-grandparents',
     george_vogan_sarah:'3× great-grandparents', john_smith_martha:'3× great-grandparents',
