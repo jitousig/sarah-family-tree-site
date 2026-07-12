@@ -430,7 +430,7 @@ const NODES = [
   <p><b>Two marriages.</b> Before Mabel, Dudley married <b>first in Manitoba</b>: the Manitoba Vital Statistics index records <b>"Dudley Percy Vigar" marrying Elizabeth Irene Parker at Winnipeg on 24 March 1941</b> (reg. 1941,011214) — five years before he moved to BC (~1946). Mabel Grace Ashton (the Portsmouth-born Ashton line) was therefore a <b>later, second wife</b> he married in British Columbia.</p>
   <p>Among his children was <b>Kenneth Vigar</b> — Sarah's father.</p>`,
   offspring:['Kenneth Vigar (Sarah’s father) — living','…and other living children (kept private)'],
-  aside:{al:'Which wife was Kenneth’s mother?',html:`Dudley now has <b>two</b> documented wives — Elizabeth Irene Parker (Winnipeg, 1941) and Mabel Grace Ashton (later, BC). Whether Sarah's father Kenneth is a child of the first (Manitoba) or second (BC) marriage is an <b>open question for the family</b> to settle; it isn't researched here (Kenneth is living).`},
+  aside:{al:'Kenneth’s mother — resolved',html:`Dudley had <b>two</b> documented marriages — first to Elizabeth Irene Parker (Winnipeg, 1941), then to <b>Mabel Grace Ashton</b> (later, in British Columbia). Per family testimony, Sarah's father <b>Kenneth is a child of the Dudley × Mabel marriage</b> — so Mabel Grace Ashton is his mother.`},
   cite:`Manitoba Vital Statistics birth reg. 1907,005060; marriage reg. 1941,011214 (Dudley Percy Vigar × Elizabeth Irene Parker, Winnipeg, 24 Mar 1941). BC death reg. 1968-09-006141 (BC Archives, mfilm B13289). Mabel Grace Ashton death: BC Archives reg. 1997-09-018668.` },
 
 { id:'bruce_violet', gen:2, ord:24, lineages:['mcdonald','woods'], status:'sourced', kind:'couple',
@@ -459,6 +459,16 @@ const NODES = [
 { id:'eileen', gen:2, ord:14, lineages:['vigar'], status:'sourced', kind:'person',
   name:`Eileen Margaret Vigar`, sub:`b. 18 Mar 1919, South Norfolk, MB`, parents:['percy_amelia'],
   facts:`<p>Dudley's youngest sister.</p>`, cite:`MB Vital Statistics birth index, reg. 1919,014571.` },
+
+/* GEN 2 · Bruce's McDonald siblings (Sarah's maternal great-aunt & -uncle) */
+{ id:'verna', gen:2, ord:26, lineages:['mcdonald'], status:'sourced', kind:'person',
+  name:`Verna M. McDonald`, sub:`b. ~1913, Toronto, Ontario`, parents:['john_ethel'],
+  facts:`<p>Bruce's elder sister — the "Verna" remembered in the family. She appears as <b>Verna M, age 8</b> in the 1921 census of John Edgar &amp; Ethel McDonald's household at 274 Carlton Street, Toronto; her presence there is what confirmed this was the right McDonald family.</p>`,
+  cite:`1921 Census of Canada, 274 Carlton St, Toronto East (Ward 2), 1 Jun 1921 — Verna M McDonald, dau., age 8 (b. ~1913). LAC RG31, Toronto East, Folder 90, p.2. SOURCED.` },
+{ id:'allan', gen:2, ord:28, lineages:['mcdonald'], status:'sourced', kind:'person',
+  name:`Allan H. McDonald`, sub:`b. ~1916, Toronto, Ontario`, parents:['john_ethel'],
+  facts:`<p>Bruce's elder brother. He appears as <b>Allan H, age 5</b> in the 1921 census of John Edgar &amp; Ethel McDonald's household at 274 Carlton Street, Toronto.</p>`,
+  cite:`1921 Census of Canada, 274 Carlton St, Toronto East (Ward 2), 1 Jun 1921 — Allan H McDonald, son, age 5 (b. ~1916). LAC RG31, Toronto East, Folder 90, p.2. SOURCED.` },
 
 { id:'victor', gen:2, ord:32, lineages:['vigar','groves'], status:'reported', kind:'person', collateral:true,
   name:`Victor Vaughan Vigar`, sub:`Portreeve, SK · 4 Dec 1915 – 18 Aug 1945`, parents:['gerald_maryellen'],
@@ -532,6 +542,7 @@ const NODES = [
     william_ann:'4× great-grandparents',
     gladys:'Great aunt', freda:'Great aunt', kennethW:'Great uncle',
     lorna:'Great aunt', eileen:'Great aunt',
+    verna:'Great aunt', allan:'Great uncle',
     claude_annie:'Great-great uncle & aunt', gerald_maryellen:'Great-great uncle & aunt',
     edwin_catherine:'In-laws (Groves)', william_groves:'In-law (Groves)',
     richard_jean:'In-law (Groves)', robert_margaret:'In-law (Groves)',
